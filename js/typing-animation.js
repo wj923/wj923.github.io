@@ -29,7 +29,9 @@ function typewriter() {
       setTimeout("typewriter()", 300);
     }
     else{
-      
+      $("#kernel").append("<div class=\"command-line\"></div>");
+      $(".command-line").append("<div class=\"current-path\">wjong></div>");
+      $(".command-line").append("<div class=\"letter-caret\"></div>");
     }
   }
   else {
@@ -37,5 +39,4 @@ function typewriter() {
     setTimeout("typewriter()", iSpeed);
   }
 }
-
 typewriter();

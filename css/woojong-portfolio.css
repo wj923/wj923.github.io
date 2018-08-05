@@ -4,6 +4,7 @@ html {
   height: 100%;
   margin: 0;
   padding: 0;
+  line-height: 15px;
 }
 
 @font-face{
@@ -12,13 +13,13 @@ html {
 }
 
 @keyframes blink {
-  0% {background-color: black;}
-  50% {background-color: white;}
+  0% {background-color: black; color: white;}
+  50% {background-color: white; color: black;}
 }
 
 @-webkit-keyframes blink {
-  0% {background-color: black;}
-  50% {background-color: white;}
+  0% {background-color: black; color: white;}
+  50% {background-color: white; color: black;}
 }
 
 body {
@@ -58,19 +59,18 @@ body {
   font-size: 15px;
 }
 
-.route {
+.command-line, .line {
+  clear: both;
+}
+
+.letter, .current-path {
   float: left;
 }
 
-.letter {
-  float: left;
-}
-
-.caret-text {
-  width: 7px;
-  height: 12px;
-  margin-top: 3px;
-  margin-right: 1px;
+.letter-caret {
+  width: 7.5px;
+  height: 14px;
+  padding-left: 0.5px;
   background-color: white;
   animation: blink 1s 1s infinite step-end;
   float: left;
