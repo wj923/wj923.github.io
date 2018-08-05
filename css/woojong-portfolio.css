@@ -52,7 +52,7 @@ body {
   width: 100%;
   padding: 10px;
   border: double;
-  background-color: green;
+  background-color: black;
   vertical-align: middle;
   overflow: auto;
   font-family: dostype;
@@ -63,8 +63,28 @@ body {
   clear: both;
 }
 
-.letter, .current-path {
+.error {
+  clear: both;
+  color: lightcoral;
+}
+
+.file {
+  clear: both;
+  color: lightgreen;
+}
+
+.directory {
+  clear: both;
+  color: lightskyblue;
+}
+
+.letter {
   float: left;
+}
+
+.current-path{
+  float: left;
+  color: gray;
 }
 
 .letter-caret {

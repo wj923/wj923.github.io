@@ -10,7 +10,7 @@ var isCapsLock = false;
 var isNumLock = false;
 var command = new String();
 
-var path = "wjong>";
+var curPath = "wjong";
 
 $("#kernel").focus();
 $("#kernel").keyup(function(event){
@@ -23,17 +23,18 @@ $("#kernel").keydown(function(event){
   if(event.which == 13){
     // Enter
     if(command.length != 0){
+      execute(command);
       preCmdList[cmdNum] = command;
       cmdNum++;
       command = "";
       cmdLength = currentPos = 0;
     }
-        
+
     $(".letter-caret").remove();
     $(".command-line").addClass("line");
     $(".command-line").removeClass("command-line");
     $("#kernel").append("<div class=\"command-line\"></div>");
-    $(".command-line").append("<div class=\"current-path\">"+ path + "</div>");
+    $(".command-line").append("<div class=\"current-path\">"+ curPath + ">&nbsp;</div>");
     $(".command-line").append("<div class=\"letter-caret\"></div>");
   }
   else if(event.which == 16){
@@ -209,6 +210,11 @@ $("#kernel").keydown(function(event){
 function insert_letter(str, index, value) {
   return str.substr(0, index) + value + str.substr(index);
 }
+
 function delete_letter(str, index) {
   return str.substr(0, index-1) + str.substr(index);
+}
+
+function set_path(path) {
+  curPath = path;
 }
