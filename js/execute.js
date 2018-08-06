@@ -119,12 +119,16 @@ function help () {
 }
 
 function who() {
-  print_line("line", "장우종 (Jang Woo Jong)");
+  print_line("directory", "장우종 (Jang Woo Jong)");
   print_line("line", "Soongsil Univ.");
   print_line("line", "010-3517-5766");
   print_line("line", "wj923@naver.com");
   print_line("line", "github.com/wj923");
-  print_line("line", "Always Positive, Challenging Developer");
+  print_line("file", "Always Positive, Challenging Developer");
+}
+
+function open(command) {
+
 }
 
 function clear() {

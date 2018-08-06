@@ -1,8 +1,8 @@
 var fs = new Object();
-fs["D/wjong"] = ["D/projects", "F/awards", "D/education", "F/introduce"];
+fs["D/wjong"] = ["D/projects", "F/awards", "D/education"];
 
-fs["D/wjong"]["D/projects"] = ["F/abc"];
-fs["D/wjong"]["D/projects"]["F/abc"] = 2;
+fs["D/wjong"]["D/projects"] = ["F/lets_go", "F/peep_peep", "F/word_chain", "F/midas_challenge"];
+fs["D/wjong"]["D/education"] = ["F/yangjae_ai", "F/do_dream"];
 fs["D/wjong"]["F/awards"] = 1;
 
 var Data = new Array();
@@ -23,7 +23,7 @@ Data[0] = "<table class=\"help-table\">\
               <th>ls&nbsp;<div class=\"underline\">[dir]</div></th>\
               <td>list directory contents\
                 <div style=\"float:right; color: lightgreen;\">files)</div>\
-                <div style=\"float:right; color: lightskyblue;\">&nbsp;(directory,&nbsp;</div> \
+                <div style=\"float:right; color: lightskyblue; margin-left:15px\">(directory,&nbsp;</div> \
               </td>\
             </tr>\
             <tr>\

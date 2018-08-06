@@ -4,7 +4,7 @@ html {
   height: 95%;
   margin: 0;
   padding: 0;
-  line-height: 15px;
+  line-height: 18px;
   background: url('../img/space.jpg') no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -26,6 +26,12 @@ html {
   0% {background-color: black; color: white;}
   50% {background-color: white; color: black;}
 }
+
+::-webkit-scrollbar{width: 8px;}
+::-webkit-scrollbar-track {width:0;}
+::-webkit-scrollbar-thumb {background-color: rgb(38,86,138); border-radius:}
+::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+width:0;height:0;} 
 
 body {
   font-family: dostype;
@@ -56,7 +62,9 @@ body {
   height: 100%;
   width: 100%;
   padding: 10px;
-  border: ridge;
+  border: 2px solid rgb(38,86,138);
+  border-radius: 10px;
+  outline: none;
   background-color: black;
   vertical-align: middle;
   overflow: auto;
@@ -102,8 +110,9 @@ body {
 }
 
 .help-table {
-  border: none;
   clear: both;
+  border: none;
+  line-height: 15px;
 }
 
 th {
