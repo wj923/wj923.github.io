@@ -2,6 +2,8 @@ var preCmdList = new Array();
 var currentCmd = 0;
 var cmdNum = 0;
 
+var tmpCmd;
+
 var currentPos = 0;
 var cmdLength = 0;
 
@@ -13,6 +15,15 @@ var command = new String();
 var curPath = "wjong";
 
 $("#kernel").focus();
+$("#kernel").on("keydown.disableScroll", function(e) {
+  var eventKeyArray = [32, 33, 34, 35, 36, 37, 38, 39, 40];
+  for (var i = 0; i < eventKeyArray.length; i++) {
+      if (e.keyCode == eventKeyArray [i]) {
+          e.preventDefault();
+          return;
+      }
+  }
+});
 $("#kernel").keyup(function(event){
   if(event.which == 16){
     // Shift key up
@@ -26,11 +37,18 @@ $("#kernel").keydown(function(event){
       execute(command);
       preCmdList[cmdNum] = command;
       cmdNum++;
+      currentCmd = cmdNum;
       command = "";
       cmdLength = currentPos = 0;
+      console.log(preCmdList);
     }
 
-    $(".letter-caret").remove();
+    if($(".letter-caret").val() == ""){
+      $(".letter-caret").addClass("letter");
+      $(".letter-caret").removeClass("letter-caret");  
+    }
+    else
+      $(".letter-caret").remove();
     $(".command-line").addClass("line");
     $(".command-line").removeClass("command-line");
     $("#kernel").append("<div class=\"command-line\"></div>");
@@ -103,11 +121,31 @@ $("#kernel").keydown(function(event){
       target.removeClass("letter");
     }    
   }
-  else if(event.which == 38){
-    // Up Arrow
-  }
-  else if(event.which == 40){
-    // Down Arrow
+  else if(event.which == 38 || event.which == 40){
+    // Up Arrow, Down Arrow
+    if(event.which == 38 && currentCmd-1 >= 0){
+      // Up Arrow
+      if(currentCmd == cmdNum){
+        tmpCmd = command;
+      }
+      $(".command-line").children(".letter").remove();
+      currentCmd--;
+      command = preCmdList[currentCmd];
+      for(var i in command)
+        $(".letter-caret").before("<div class=\"letter\">" + command[i] + "</div>");
+      currentPos = command.length;
+      cmdLength = command.length;
+    }
+    else if(event.which == 40 && currentCmd != cmdNum){
+      // Down Arrow
+      $(".command-line").children(".letter").remove();
+      currentCmd++;
+      command = (currentCmd == cmdNum) ? tmpCmd : preCmdList[currentCmd];
+      for(var i in command)
+        $(".letter-caret").before("<div class=\"letter\">" + command[i] + "</div>");
+      currentPos = command.length;
+      cmdLength = command.length;  
+    }
   }
   else if(event.which == 9){
     // Tab
@@ -122,6 +160,12 @@ $("#kernel").keydown(function(event){
   }
   else if(event.which == 27){
     // ESC
+    $(".letter-caret").remove();
+    $(".command-line").addClass("line");
+    $(".command-line").removeClass("command-line");
+    $("#kernel").append("<div class=\"command-line\"></div>");
+    $(".command-line").append("<div class=\"current-path\">"+ curPath + ">&nbsp;</div>");
+    $(".command-line").append("<div class=\"letter-caret\"></div>");
   }
   else if((112 <= event.which && event.which <= 123) || event.which == 12 || event.which == 21 || event.which == 25
           || event.which == 45 || event.which == 33 || event.which == 34 || event.which == 255 || event.which == 18 || event.which == 17){
@@ -205,6 +249,7 @@ $("#kernel").keydown(function(event){
 
     $(".letter-caret").before("<div class=\"letter\">" + letter + "</div>");
   }
+  $("#kernel").scrollTop($("#kernel").prop("scrollHeight"));
 });
 
 function insert_letter(str, index, value) {
