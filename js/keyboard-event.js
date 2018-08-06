@@ -40,7 +40,6 @@ $("#kernel").keydown(function(event){
       currentCmd = cmdNum;
       command = "";
       cmdLength = currentPos = 0;
-      console.log(preCmdList);
     }
 
     if($(".letter-caret").val() == ""){
@@ -144,7 +143,7 @@ $("#kernel").keydown(function(event){
       for(var i in command)
         $(".letter-caret").before("<div class=\"letter\">" + command[i] + "</div>");
       currentPos = command.length;
-      cmdLength = command.length;  
+      cmdLength = command.length;
     }
   }
   else if(event.which == 9){

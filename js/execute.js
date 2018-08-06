@@ -7,6 +7,10 @@ function execute (command) {
   switch(cmd[0]){
     case "cd" : change_directory(command); break;
     case "ls" : list(command); break;
+    case "help" : help(); break;
+    case "who" : who(); break;
+    case "clear" : clear(); break;
+    case "open" : open(command); break;
     default : print_line("error", cmd[0] + " : command not found"); break;
   }
 }
@@ -15,6 +19,13 @@ function change_directory (command) {
   var path = getPath(command);
   var list = curFs;
   var tmpPath = curPath;
+
+  if(path.length == 0){
+    curFs = getFilesystem();
+    curFs = curFs["D/wjong"];
+    curPath = "wjong";
+    return;
+  }
   
   if(path.length != 0){
     var pathList = path.split("/");
@@ -101,6 +112,23 @@ function list (command) {
           print_line("file", list[i].split("/")[1]);
     }
   }
+}
+
+function help () {
+  $("#kernel").append(Data[0]);
+}
+
+function who() {
+  print_line("line", "장우종 (Jang Woo Jong)");
+  print_line("line", "Soongsil Univ.");
+  print_line("line", "010-3517-5766");
+  print_line("line", "wj923@naver.com");
+  print_line("line", "github.com/wj923");
+  print_line("line", "Always Positive, Challenging Developer");
+}
+
+function clear() {
+  $("#kernel").children().remove();
 }
 
 function print_line (type, value) {

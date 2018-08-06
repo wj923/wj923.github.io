@@ -56,7 +56,7 @@ body {
   height: 100%;
   width: 100%;
   padding: 10px;
-  border: double;
+  border: ridge;
   background-color: black;
   vertical-align: middle;
   overflow: auto;
@@ -99,4 +99,27 @@ body {
   background-color: white;
   animation: blink 1s 1s infinite step-end;
   float: left;
+}
+
+.help-table {
+  border: none;
+  clear: both;
+}
+
+th {
+  font-size: 16px;
+  color: orange;
+  text-align: left;
+  font-weight: unset;
+}
+
+td {
+  padding-left: 30px;
+}
+
+.underline {
+  color: sandybrown;
+  float: right;
+  font-weight: 100;
+  text-decoration: underline;
 }

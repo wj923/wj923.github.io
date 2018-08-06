@@ -1,7 +1,8 @@
-// set up text to print, each item in array is new line
 var aText = new Array(
-    "There are only 10 types of people in the world:",
-    "Those who understand binary, and those who don't"
+    "Hello, WooJong! [Version 2018]",
+    "(c) 2018 Jang Woo Jong. All rights reserved.",
+    " ",
+    "Documentation : type \'help\'"
     );
 var iSpeed = 20; // time delay of print out
 var iIndex = 0; // start printing array at this posision
