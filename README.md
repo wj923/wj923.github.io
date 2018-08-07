@@ -5,8 +5,6 @@ Start Bootstrap is an open source library of free Bootstrap templates and themes
 Copyright 2018 Jang Woo Jong.
 
 ## References
-Neodgm Font (https://github.com/Dalgona/neodgm/releases)
-
-Typewriter Effect BY GEOFF GRAHAM (https://css-tricks.com/snippets/css/typewriter-effect/)
-
-Space Wallpaper (https://wallhere.com/ko/wallpaper/247905)
+- Neodgm Font (https://github.com/Dalgona/neodgm/releases)
+- Typewriter Effect BY GEOFF GRAHAM (https://css-tricks.com/snippets/css/typewriter-effect/)
+- Space Wallpaper (https://wallhere.com/ko/wallpaper/247905)
