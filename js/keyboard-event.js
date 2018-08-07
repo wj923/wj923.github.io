@@ -152,13 +152,36 @@ $("#kernel").keydown(function(event){
   }
   else if(event.which == 9 && currentPos == cmdLength){
     // Tab
+    var list = curFs;
     var str = command.split("\u00A0");
-    var start_str = str[str.length-1];
+    var start_str;
+
+    var path = str[str.length-1];
+    var tmpPath = curPath;
+    var pathList = path.split("/");
+    for(var i in pathList){
+      if(pathList[i] == ".") continue;
+      else if(pathList[i] == ".."){
+        var return_parent = move_parent(tmpPath);
+        list = return_parent[0];
+        tmpPath = return_parent[1];
+        continue;
+      }
+
+      if(i == pathList.length-1){
+        start_str = pathList[i];
+        break;
+      }
+      list = list["D/"+pathList[i]];
+      if(!list) return;
+      tmpPath += "/" + pathList[i];
+    }
+
     var pattern = new RegExp("^"+start_str+".*");
     var match_list = new Array();
-    for(var i=0; i<curFs.length; i++){
-      if(curFs[i].substr(2).match(pattern))
-        match_list.push(curFs[i]);
+    for(var i=0; i<list.length; i++){
+      if(list[i].substr(2).match(pattern))
+        match_list.push(list[i]);
     }
 
     if(match_list.length == 1){

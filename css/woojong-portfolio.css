@@ -58,7 +58,7 @@ body {
 
 .kernel-panel {
   width: 50%;
-  height:380px;
+  height: 80%;
   clear: both;
   position: relative;
   margin: auto
@@ -68,7 +68,7 @@ body {
   height: 100%;
   width: 100%;
   padding: 10px;
-  border: 2px solid rgb(38,86,138);
+  border: 1.5px solid rgb(38,86,138);
   border-radius: 10px;
   outline: none;
   background-color: black;
@@ -80,6 +80,10 @@ body {
 
 .command-line, .line {
   clear: both;
+}
+
+.line-right {
+  float: right;
 }
 
 .error {
@@ -113,9 +117,13 @@ body {
   color: black;
   background-color: white;
   animation: blink 1s 0.5s infinite step-end;
-  animation-play-state: running;
   float: left;
   border: none;
+}
+
+.content-title {
+  clear: both;
+  color: aquamarine;
 }
 
 .help-table {
