@@ -38,6 +38,7 @@ function change_directory (command) {
         continue;
       }
       var file = list["F/"+pathList[i]];
+      console.log(pathList[i]);
       if(file){
         print_line("error", "cd : " + path + ": Not a directory");
         return;

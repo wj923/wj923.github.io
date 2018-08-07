@@ -10,20 +10,21 @@ var cmdLength = 0;
 var isShift = false;
 var isCapsLock = false;
 var isNumLock = false;
-var command = new String();
+var isTab = false;
 
+var command = new String();
 var curPath = "wjong";
 
-$("#kernel").focus();
-$("#kernel").on("keydown.disableScroll", function(e) {
-  var eventKeyArray = [32, 33, 34, 35, 36, 37, 38, 39, 40];
-  for (var i = 0; i < eventKeyArray.length; i++) {
-      if (e.keyCode == eventKeyArray [i]) {
-          e.preventDefault();
-          return;
-      }
-  }
+$("#kernel").blur(function() {
+  $(".letter-caret").css("animation-name", "lose-focus");
+  $(".letter-caret").css("border", "ridge 0.5px");
 });
+$("#kernel").focus(function() {
+  $(".letter-caret").css("animation-name", "blink");
+  $(".letter-caret").css("border", "none");
+});
+$("#kernel").focus();
+$("#kernel").on("keydown.disableScroll", function(e) { e.preventDefault(); });
 $("#kernel").keyup(function(event){
   if(event.which == 16){
     // Shift key up
@@ -42,12 +43,9 @@ $("#kernel").keydown(function(event){
       cmdLength = currentPos = 0;
     }
 
-    if($(".letter-caret").val() == ""){
-      $(".letter-caret").addClass("letter");
-      $(".letter-caret").removeClass("letter-caret");  
-    }
-    else
-      $(".letter-caret").remove();
+  
+    $(".letter-caret").addClass("letter");
+    $(".letter-caret").removeClass("letter-caret");
     $(".command-line").addClass("line");
     $(".command-line").removeClass("command-line");
     $("#kernel").append("<div class=\"command-line\"></div>");
@@ -57,6 +55,7 @@ $("#kernel").keydown(function(event){
   else if(event.which == 16){
     // Shift
     isShift = true;
+    isTab = false;
   }
   else if(event.which == 8){
     // Backspace
@@ -67,6 +66,7 @@ $("#kernel").keydown(function(event){
       cmdLength--;
       currentPos--;
     }
+    isTab = false;
   }
   else if(event.which == 46){
     // Delete
@@ -78,6 +78,7 @@ $("#kernel").keydown(function(event){
       command = delete_letter(command, currentPos+1);
       cmdLength--;
     }
+    isTab = false;
   }
   else if(event.which == 36 || event.which == 35){
     // Home, END
@@ -96,6 +97,7 @@ $("#kernel").keydown(function(event){
     $(".letter-caret").removeClass("letter-caret");
     target.addClass("letter-caret");
     target.removeClass("letter");
+    isTab = false;
   }
   else if(event.which == 37 || event.which == 39){
     // Left Arrow, Right Arrow
@@ -118,7 +120,8 @@ $("#kernel").keydown(function(event){
       $(".letter-caret").removeClass("letter-caret");
       target.addClass("letter-caret");
       target.removeClass("letter");
-    }    
+    }
+    isTab = false;
   }
   else if(event.which == 38 || event.which == 40){
     // Up Arrow, Down Arrow
@@ -145,17 +148,55 @@ $("#kernel").keydown(function(event){
       currentPos = command.length;
       cmdLength = command.length;
     }
+    isTab = false;
   }
-  else if(event.which == 9){
+  else if(event.which == 9 && currentPos == cmdLength){
     // Tab
+    var str = command.split("\u00A0");
+    var start_str = str[str.length-1];
+    var pattern = new RegExp("^"+start_str+".*");
+    var match_list = new Array();
+    for(var i=0; i<curFs.length; i++){
+      if(curFs[i].substr(2).match(pattern))
+        match_list.push(curFs[i]);
+    }
+
+    if(match_list.length == 1){
+      var remain_str = match_list[0].substr(start_str.length+2);
+      command += remain_str;
+      currentPos += remain_str.length;
+      cmdLength += remain_str.length;
+      for(var i in remain_str)
+        $(".letter-caret").before("<div class=\"letter\">" + remain_str[i] + "</div>");
+    }
+    else if(match_list.length > 1){
+      if(!isTab){
+        isTab = true;
+        return;
+      }
+      for(var i in match_list){
+        if(is_directory(match_list[i]))
+          print_line("directory", match_list[i].substr(2));
+        else
+          print_line("file", match_list[i].substr(2));
+      }
+      var cur_line = $(".command-line").clone();
+      $(".letter-caret").addClass("letter");
+      $(".letter-caret").removeClass("letter-caret");
+      $(".command-line").addClass("line");
+      $(".command-line").removeClass("command-line");
+      $("#kernel").append(cur_line);
+    }
   }
   else if(event.which == 20){
     // CapsLock
     isCapsLock = !isCapsLock;
+    isTab = false;
   }
   else if(event.which == 144){
     // NumLock
     isNumLock = !isNumLock;
+    isTab = false;
   }
   else if(event.which == 27){
     // ESC
@@ -165,6 +206,7 @@ $("#kernel").keydown(function(event){
     $("#kernel").append("<div class=\"command-line\"></div>");
     $(".command-line").append("<div class=\"current-path\">"+ curPath + ">&nbsp;</div>");
     $(".command-line").append("<div class=\"letter-caret\"></div>");
+    isTab = false;
   }
   else if((112 <= event.which && event.which <= 123) || event.which == 12 || event.which == 21 || event.which == 25
           || event.which == 45 || event.which == 33 || event.which == 34 || event.which == 255 || event.which == 18 || event.which == 17){
@@ -247,6 +289,7 @@ $("#kernel").keydown(function(event){
     cmdLength++;
 
     $(".letter-caret").before("<div class=\"letter\">" + letter + "</div>");
+    isTab = false;
   }
   $("#kernel").scrollTop($("#kernel").prop("scrollHeight"));
 });
