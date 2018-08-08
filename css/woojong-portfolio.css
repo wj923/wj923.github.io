@@ -4,7 +4,7 @@ html {
   height: 95%;
   margin: 0;
   padding: 0;
-  line-height: 18px;
+  line-height: 25px;
   background: url('../img/space.jpg') no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -54,6 +54,7 @@ body {
 .title-text {
   text-align: center;
   padding-top: 1em;
+  font-size: 50px;
 }
 
 .kernel-panel {
@@ -75,7 +76,7 @@ body {
   vertical-align: middle;
   overflow: auto;
   font-family: dostype;
-  font-size: 15px;
+  font-size: 25px;
 }
 
 .command-line, .line {
@@ -111,9 +112,8 @@ body {
 }
 
 .letter-caret {
-  width: 7.5px;
-  height: 14px;
-  padding-left: 0.5px;
+  width: 12.5px;
+  height: 25px;
   color: black;
   background-color: white;
   animation: blink 1s 0.5s infinite step-end;
@@ -129,11 +129,11 @@ body {
 .help-table {
   clear: both;
   border: none;
-  line-height: 15px;
+  line-height: 25px;
 }
 
 th {
-  font-size: 16px;
+  font-size: 26px;
   color: orange;
   text-align: left;
   font-weight: unset;
