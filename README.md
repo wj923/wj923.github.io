@@ -1,6 +1,6 @@
 # "Hello, WooJong!"
 
-![main_screen](.\img\main_screen.png)
+![main_screen](https://user-images.githubusercontent.com/25025410/43810785-6ea8aa56-9af4-11e8-96fd-3ce81739f5ef.png)
 
 ## About
 
