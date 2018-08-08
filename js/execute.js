@@ -208,11 +208,7 @@ function print_line (type, value) {
 }
 
 function is_directory(path){
-  var identifier = path.split("/")[0];
-  if(identifier == "D")
-    return true;
-  else
-    return false;
+  return path.split("/")[0] == "D" ? true : false;
 }
 
 function move_parent (path) {
