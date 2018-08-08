@@ -1,6 +1,6 @@
 # "Hello, WooJong!"
 
-![main_screen](img\main_screen.png)
+![main_screen](.\img\main_screen.png)
 
 ## About
 
